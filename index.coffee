@@ -40,15 +40,17 @@
 		.headers("X-Kegbot-Api-Key": TOKEN)
 		.get() (error, response, body)->
 			body = JSON.parse body
+                        msg = ''
 			try
 				for tap, index in body.objects
+                                        location = tap.name
 					keg = tap.current_keg
 					unless keg
-						message.send "No keg on Tap #{index+1}"
+						message.send "#{location}: No keg on Tap #{index+1}"
 						continue
 
-					image = keg?.beverage.picture?.thumbnail_url
-					message.send image if image
+					#image = keg?.beverage.picture?.thumbnail_url
+					#message.send image if image
 
 					name = keg.type.name
 					style = keg.beverage.style
@@ -57,13 +59,21 @@
 					percentLeft = Math.floor keg.percent_full
 					abv = "#{keg.type.abv}%"
 
-					msg = "#{name} #{style}: \n"
+					msg += "#{location}: #{name} (#{style})"
 					if abv
-						msg +=  "#{abv} ABV. "
+						msg +=  " - #{abv} ABV"
 
-					msg += "#{percentLeft}% Remaining\n"
-					msg += "#{link}\n"
-					message.send msg
+					msg += " - #{percentLeft}% Remaining\n"
+					#msg += " - #{link}\n"
+			catch error
+				console.log error
+
+                       
+                        # If we got a message out of all of that, send it 
+                        try
+			        message.send msg if msg
+                                unless msg
+                                    message.send "I'm so sorry. There is no beer on tap." 
 			catch error
 				console.log error
 		return 
