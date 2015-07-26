@@ -54,16 +54,18 @@
 
                                         name = keg.type.name
                                         style = keg.beverage.style
+                                        producer = keg.beverage.producer.name
                                         id = keg.id
                                         link = "#{KEGBOT_URL}/kegs/#{id}"
                                         percentLeft = Math.floor keg.percent_full
                                         abv = "#{keg.type.abv}%"
 
                                         msg += "#{location}: #{name} (#{style})"
-                                        if abv
-                                                msg +=  " - #{abv} ABV"
+                                        msg +=  " by #{producer}" if producer
+                                        msg +=  " - #{abv} ABV" if abv
 
-                                        msg += " - #{percentLeft}% Remaining\n"
+                                        #msg += " - #{percentLeft}% Remaining\n"
+                                        msg += "\n"
                                         #msg += " - #{link}\n"
                         catch error
                                 console.log error
@@ -71,7 +73,9 @@
 
                         # If we got a message out of all of that, send it
                         try
-                                message.send msg if msg
+                                if msg
+                                    msg = '```' + msg + '```'
+                                    message.send msg
                                 unless msg
                                     message.send "I'm so sorry. There is no beer on tap."
                         catch error
