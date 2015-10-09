@@ -31,6 +31,10 @@
       send_keg_stats res
       return
 
+    robot.respond /what\'?s\s*on\s*tap/i, (res) ->
+      send_keg_stats res
+      return
+
   send_keg_stats = (message) ->
     KEGBOT_URL = process.env.HUBOT_KEGBOT_URL
     TOKEN = process.env.HUBOT_KEGBOT_TOKEN
