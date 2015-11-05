@@ -48,9 +48,15 @@
       try
         for tap, index in body.objects
           location = tap.name
+
+          if location.length <= 13
+            count = location.length
+            for i in [count..12] by 1
+              location += ' '
+
           keg = tap.current_keg
           unless keg
-            message.send "#{location}: No keg on Tap #{index+1}"
+            msg += "#{location}: No keg on Tap\n"
             continue
 
           #image = keg?.beverage.picture?.thumbnail_url
@@ -63,11 +69,6 @@
           link = "#{KEGBOT_URL}/kegs/#{id}"
           percentLeft = Math.floor keg.percent_full
           abv = "#{keg.type.abv}%"
-
-          if location.length <= 13
-            count = location.length
-            for i in [count..12] by 1
-              location += ' '
 
           msg += "#{location}: #{name} (#{style})"
           msg +=  " by #{producer}" if producer
