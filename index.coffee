@@ -27,11 +27,11 @@
       robot.logger.warning 'The HUBOT_KEGBOT_TOKEN environment variable not set'
       return
 
-    robot.respond /keg me/i, (res) ->
+    robot.hear /keg me/i, (res) ->
       send_keg_stats res
       return
 
-    robot.respond /what\'?s\s*on\s*tap/i, (res) ->
+    robot.hear /what\'?s\s*on\s*tap/i, (res) ->
       send_keg_stats res
       return
 
