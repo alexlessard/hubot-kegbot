@@ -65,6 +65,8 @@
           name = keg.type.name
           style = keg.beverage.style
           producer = keg.beverage.producer.name
+          percentage_left = Math.round(keg.percent_full)
+          pints = Math.round(keg.size_volume_ml / 473.176)
           id = keg.id
           link = "#{KEGBOT_URL}/kegs/#{id}"
           percentLeft = Math.floor keg.percent_full
@@ -73,8 +75,8 @@
           msg += "#{location}: #{name} (#{style})"
           msg +=  " by #{producer}" if producer
           msg +=  " - #{abv} ABV" if abv
+          msg +=  " - #{percentage_left}% Remaining (~ #{pints} Pints)"
 
-          #msg += " - #{percentLeft}% Remaining\n"
           msg += "\n"
           #msg += " - #{link}\n"
       catch error
