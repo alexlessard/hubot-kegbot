@@ -66,7 +66,7 @@
           style = keg.beverage.style
           producer = keg.beverage.producer.name
           percentage_left = Math.round(keg.percent_full)
-          pints = Math.round(keg.size_volume_ml / 473.176)
+          pints = Math.round(keg.remaining_volume_ml / 473.176)
           id = keg.id
           link = "#{KEGBOT_URL}/kegs/#{id}"
           percentLeft = Math.floor keg.percent_full
