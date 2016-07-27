@@ -75,7 +75,8 @@
           msg += "#{location}: #{name} (#{style})"
           msg +=  " by #{producer}" if producer
           msg +=  " - #{abv} ABV" if abv
-          msg +=  " - #{percentage_left}% Remaining (~ #{pints} Pints)"
+          # TEMP don't show volume until flow sensors work
+          # msg +=  " - #{percentage_left}% Remaining (~ #{pints} Pints)"
 
           msg += "\n"
           #msg += " - #{link}\n"
