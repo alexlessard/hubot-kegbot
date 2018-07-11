@@ -87,7 +87,7 @@
       # If we got a message out of all of that, send it
       try
         if msg
-            msg = '```' + msg + '```'
+            msg = '```' + msg + '-------\nRequest new beer at http://beerrequest.com```'
             message.send msg
         unless msg
             message.send "I'm so sorry. There is no beer on tap."
